@@ -32,6 +32,9 @@ import {
 import AutoDllPlugin from "autodll-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 // import HappyPack from "happypack";
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+
+const smp = new SpeedMeasurePlugin();
 
 // The externals config makes sure that
 // on the server side when modules are
@@ -374,5 +377,5 @@ export default async function getBaseWebpackConfig(
     return entry;
   };
 
-  return webpackConfig;
+  return smp.wrap(webpackConfig);
 }
